@@ -1,0 +1,593 @@
+# Coding styleguide
+
+1. Preproocessor
+2. Frameworks
+3. Syntax & Formatting
+4. Units
+5. Naming
+6. Variables
+7. Specificity
+8. Architecture
+9. Documentation
+
+### Things to cover
+- Being careful with @extend -> architecture
+- Breakpoints
+- Sass output and folder structure there -> architecture
+- Mixins and functions
+- Full example
+
+## Preprocessor
+The  most supported preprocessor is sass/scss. Using this pre-processor means you'll get supported resources such as frameworks, libraries, tutorials and a comprehensive styleguide as support.
+
+That being said, any preprocessor is allowed as long as it's a sound project and has community support.
+
+## Frameworks
+18F currently recommends two CSS frameworks. Team members can choose the framework that best meets project and design/dev needs.
+
+1. [http://bourbon.io/](Bourbon)
+2. [http://purecss.io/](PureCSS)
+
+#### Rationale
+These frameworks were chosen because they are relatively unopinionated about design decisions while still providing the helpers that make frameworks essential to fast and accurate frontend work, ie, solutions for responsive design, grids, and common design patterns. In addition, both frameworks, through modular design and excellent documentation, make it easy for the designer/dev to only use the parts that she/he needs, rather than including a hefty library. Of the two, PureCSS is extremely lightweight, while Bourbon is a Sass mixin library that has extensions for a robust semantic grid [http://neat.bourbon.io/](Neat), base scaffold [http://bitters.bourbon.io/](Bitters) and patterns [http://refills.bourbon.io/](Refills).
+
+18F specifically does not recommend using Twitter/Bootstrap for production work because of one, the difficulty in adapting its opinionated styles to bespoke design work and two, its CSS style that places semantic layout instructions
+directly in HTML classes.
+
+
+## Format
+
+### Spacing
+- Where possible, limit CSS files’ width to 80 characters.
+	- There will be unavoidable exceptions to this rule—such as URLs, or gradient syntax—which shouldn’t be worried about.
+- Use soft-tabs with a two space indent.
+- Put one space after : in property declarations.
+- Put spaces before { in rule declarations.
+- A blank line should be placed between each selector block.
+- Should end with a closing curly brace that is unindented and on a separate line
+- Each declaration should appear on its own line for more accurate error reporting.
+- Selectors should never be indented
+```scss
+// Good
+.rule {
+  margin: 3px;
+  text-align: center;
+}
+
+.another_rule {
+  margin: 3px;
+}
+
+// Bad
+.rule{
+    margin:3px;text-align:center;}
+```
+- Multiple selectors should each be on a single line, with no space after each
+comma.
+
+```scss
+selector1,
+selector2,
+selector3 {
+}
+```
+
+### Property-Value Pairs
+- Each on its own line
+- Be indented one level.
+- A single space after the colon that separates the name from the value.
+- End in a semicolon.
+```scss
+selector {
+  name: value;
+  name: value;
+}
+```
+
+- Strive to limit use of shorthand declarations to instances where you must
+explicitly set all the available values.
+```scss
+// Bad
+margin: inherit 3em;
+// Good
+margin-bottom: 3em;
+margin-top: 3em;
+```
+
+- URLs and string values should be single quoted
+```scss
+  background-image: url('/images/kittens.jpg');
+  font-family: 'Helvetica', sans-serif;
+  font-family: 'Lucida Grande', 'Helvetica', sans-serif;
+```
+- Top-level numeric calculations should always be wrapped in parentheses
+```scss
+// Good
+.component {
+  width: (100% / 3);
+}
+
+// Bad
+.component {
+  width: 100% / 3;
+}
+```
+- Avoid magic numbers. At the very least, comment them with a TODO
+```scss
+// Bad
+.component {
+  top: 0.327em;
+}
+
+// Better
+/**
+ * 1. Magic number. This value is the lowest I could find to align the top of
+ * `.foo` with its parent. Ideally, we should fix it properly.
+ */
+.component {
+  top: 0.327em;
+}
+
+// Good
+.component {
+  top: $align_top;
+}
+```
+
+### Sorting
+* Follow ordering:
+	1. variables
+	2. @extend directives
+	3. @include directives
+	4. properties
+- For properties alphabetical order or type order, just keep the whole project consistant.
+- Nested selectors always coming after a new line.
+- Mixin calls with @content coming after any nested selector.
+```scss
+// Good
+.module {
+  $amount = 3;
+  @extend .component;
+  @include sizing($amount);
+  margin-top: $amount * 1em;
+  text-align: center;
+
+  .module__ele {
+    color: #fff932;
+  }
+
+  @include media($sm) {
+    margin-top: $amount +10em;
+  }
+}
+```
+
+
+## Units
+### Measurements
+- Use **rem** units for font sizes with a em fallback.
+This can be done with the following mixin:
+```scss
+@mixin font-size($sizeValue: 1.6) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
+```
+- Set the html font size to 62.5% to ensure .1 rem unit equals 1px
+```scss
+html {
+  font-size: 62.5%;
+}
+```
+- Use **em** units for positioning.
+- Use **percentages** when elements have to change based on screen size.
+- Use **px** units for when a measurement shouldn't change based on user set font size or browser zooming.
+- Use unitless values for line-height as this will inherit values from the font-size.
+- Use up to 10 decimal places in em units to ensure accuracy.
+```scss
+// Good
+.body_copy {
+  @include rem-font-size(1.4);
+  // Line height will now be 1.8 of 1.4rem, or 2.5rem.
+  line-height: 1.8;
+}
+
+// Good
+.container {
+  height: 12em;
+  margin-left: 10.6666666667em;
+  width: 82.5%;
+}
+```
+- If the unit is 0, it does not require a unit.
+```scss
+// Good
+width: 0;
+// Bad
+width: 0px;
+```
+- Ensure a unit is never left out for dimensions, margins, borders, padding,
+typography.
+```scss
+// Bad
+width: 12;
+```
+
+### Colors
+- Use with **hex** notation, **rgb(a)**, or **hsl(a)**.
+- Both three-digit and six-digit hexadecimal notation are acceptable.
+- When denoting color using hexadecimal notation, use all lowercase letters.
+- When using HSL or RGB notation, always add a single space after a comma (,) and no space between parentheses ((, )) and content.
+```scss
+// Good
+color: #fff;
+// Good
+color: #fe9848;
+// Good
+color: rgba(255, 100, 255, 0.5);
+// Bad
+color: #FFF;
+```
+- If you use an rgba rule, include a fallback. i.e:
+```scss
+.illustration {
+  background-color: #eee; /* Fallback */
+  background-color: rgba(221, 221, 221, 0.75);
+}
+```
+
+
+## Naming
+- HTML elements should be in lowercase.
+```scss
+body, div {
+```
+- Classes should be lowercase.
+- Avoid camelcase.
+- Ensure things are understanbly named.
+```scss
+// Bad
+// Avoid uppercase
+.ClassNAME { }
+
+// Avoid camel case
+.commentForm { }
+
+// What is a c1-xr?! Use a better name.
+.c1-xr { }
+
+// Use quotes in psuedo selectors
+input[type=text] { }
+```
+- Avoid presentation or location specific words in the name.
+```scss
+// Bad
+.blue
+.text-gray
+.100width-box
+
+// Good
+.warning
+.primary
+.lg-box
+```
+- Be apprehensive to name components based on content.
+```scss
+// Be wary of naming like this, as it limits the use of the class.
+.product-list
+
+// Better
+.item-list
+```
+- Don't abbreviate unless its a well known abbreviation
+```scss
+// Bad
+.bm-rd
+
+// Good
+.block--lg
+```
+- Use quotes in type psuedo selectors.
+```scss
+// Good
+.top_image[type="text"] { }
+```
+- Name CSS components/modules with singlular nouns.
+```scss
+.button { }
+```
+- Name modifiers and state based rules with adjectives.
+```scss
+.is_hovered { }
+```
+- If your CSS has to interface in the public with other CSS libraries, consider namespacing every class.
+```css
+.f18-component
+```
+
+### Methodologies
+There are many naming methodologies that are supported by this guidelines. The important thing is to stick with a consistent naming convention. Here's a rundown of some known methodologies.
+
+#### BEM
+BEM is based on a structure of every entity in CSS being composed of a blocks, elements and modifiers. For each entity (component or module) there is a top level block class, which has various elements nested in it. The top level block can also have various modifiers that are small differences in the base block.
+
+#####Resources
+- [article explaining bem](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
+- [bem website](https://en.bem.info/method/)
+
+```scss
+// block
+.inset {
+  margin-left: 15%;
+  
+  // element
+  .inset__content {
+    padding: 3em;
+  }
+}
+
+// modifier
+.inset--sm {
+  margin-left: 10%;
+
+  .inset__content {
+    padding: 1em;
+  }
+}
+
+// modifier
+.inset--lg {
+  margin-left: 20%;
+}
+
+```
+
+#### Fun
+The FUN methodology is very similar to BEM but is a little light weight in its implementation. FUN names are composed of a namespace, component name, component section, and variant flag: `[namespace][-ComponentName][_ComponentSection][-variant-flag]`.
+
+##### Resouces
+- [fun explained](http://benfrain.com/fun-css-naming-convention-explained/)
+
+```scss
+// namespace + component
+.f18-item {
+  // component section
+  .f18-item_section {
+    padding: 1em;
+  }
+  // variant flag
+  .f18-item_section-warning {
+    color: #ff0;
+  }
+}
+```
+
+### js- Flagged Classes
+
+Don't attach styles to classes with a `js-` flag. These classes are reserved for app-logic.
+
+```css
+// Bad
+.js-people {
+  color: #ff0;
+}
+```
+
+#### Rationale
+A `js-` flagged class needs to be highly portable. Adding styles to it breaks that portability.
+
+
+## Inheritance (@include and @extend)
+### Mixins
+- Use mixins for groups of properties that appear together for a reaons and are used multiple times.
+```scss
+@mixin clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+```
+- Use mixins for compoennts to change size.
+- Use mixins when something requires parameters.
+```scss
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+```
+- Do not use mixins for browser prefixes. Use [Autoprefixer)[https://github.com/postcss/autoprefixer] or Bourbon for that.
+```scss
+// Bad
+@mixin transform($value) {
+  -webkit-transform: $value;
+  -moz-transform: $value;
+  transform: $value;
+}
+```
+### Extend
+Be very careful with using @extend. It's a powerful tool that can have disastrous side-effects. Before using please consider:
+
+- where is my current selector going to be appended?
+- am I likely to be causing undesired side-effects?
+- how large is the CSS generated by this single extend?
+
+If you're unsure of using @extend, use these rules to not run into trouble:
+
+- Use extend from within a module, not across different modules.
+- Use extend on placeholders exclusively, not on actual selectors.
+- Make sure the placeholder you extend is present as little as possible in the stylesheet.
+
+You can use mixins in place of selectors. While mixins will copy more code, the difference will often be negligible once the output file has been gzipped.
+
+## Architecture
+
+### File structure
+
+### Importing
+
+
+## Specificity
+- IDs should be reserved for JavaScript.
+```scss
+// Bad
+#component { }
+
+// Good
+.component { }
+```
+- Don't nest more then 3 layers deep.
+- Try not to chain selectors.
+- Do not fix problems with ```!important```. Use ```!important``` purposefully.
+```scss
+// Bad
+.component {
+  width: 37.4% !important;
+}
+
+// Good
+.hidden {
+  display: none !important
+}
+```
+- Keep specificity low and trend upwards in specificity as you move further down file. See Specificty graph.
+- Don't use unnecessary tag selectors.
+```scss
+// Bad
+p.body_text { }
+
+// Good
+.body_text
+```
+- If you have to hack specificity, use a safe hack: the multi class.
+```scss
+.component.component { }
+```
+
+### Specificity graph
+An easy rule to use when dealing with specificy is to start from a low specificty and curve to higher specificity as you move towards the bottom of the output file. The reasoning for this is that CSS rules get replace by rules further down in the file, meaning you'll override rules in an expected way.
+
+Theres a tool that can graph your files specificity, [css specificity graph](http://jonassebastianohlsson.com/specificity-graph/). Run your final output file through this tool and strive for a curve trending upwards.
+
+#### Resources
+* [css specificity graph](http://jonassebastianohlsson.com/specificity-graph/)
+* [explanation](http://csswizardry.com/2014/10/the-specificity-graph/)
+
+### Rationale
+With specificity, comes great responsibility. Broad selectors allow us to be efficient, yet can have adverse consequences if not tested. Location-specific selectors can save us time, but will quickly lead to a cluttered stylesheet. Exercise your best judgement to create selectors that find the right balance between contributing to the overall style and layout of the DOM.
+
+When modifying an existing element for a specific use, try to use specific class names. Instead of .listings-layout.bigger use rules like .listings-layout.listings-bigger. Think about ack/greping your code in the future.
+
+Use lowercase and separate words with hyphens when naming selectors. Avoid camelcase and underscores. Use human-readable selectors that describe what element(s) they style.
+Attribute selectors should use double quotes around values Refrain from using over-qualified selectors; div.container can simply be stated as .container.
+
+IDs should be reserved for JavaScript. Unless you have a very good reason, all CSS should be attached to classes rather than IDs. When in doubt, use a class name. This prevents target confusion and allows CSS devs and JS devs to co-exist in the same code in peace. If you must use an id selector (#selector) make sure that you have no more than one in your rule declaration.
+
+
+## Variables
+- Create new variables in the following circumstances.
+	- the values is repeated twice.
+	- the value is likely to be updated at least once.
+	- all occurrences of the value are tied to the variable (i.e. not by coincidence).
+- When building scss that will be distributed use the ```default``` flag to allow overriding
+```scss
+$baseline: 1em !default;
+```
+- The ```!global``` flag should only be used when overriding a global variable from a local scope.
+- Variables across the whole scss codebase should be placed in their own file.
+- When declaring color variables, don't base the name on the color content.
+```scss
+// Bad
+$light_blue: #18f;
+$dark_green: #383;
+
+// Good
+$primary: #18f;
+$secondary: #383;
+$neutral: #ccc;
+```
+- Be careful when naming variables based on their context.
+```scss
+// Bad
+$background_color
+```
+- Don't use the value of dimensional variables in the variable name
+```scss
+// Bad
+$width_100: 100em;
+
+// Good
+$width_lg: 100em;
+```
+- Name all used z-indexes with a variable.
+- Have a z-index variable for each z-index used, and a separate variable, possibly aliased for where the z-index is used.
+```scss
+$z_index-neg_1: -100;
+$z_index-neg_2: -200;
+$z_index-1: 100;
+
+$z_index-hide: $z_index-neg_2;
+$z_index-bg: $z_index-neg_1;
+$z_index-show: $z_index-1;
+```
+
+
+## Responsive Design & Breakpoints
+- Set variables for breakpoints at the top of your stylesheet. This
+  functionality is built into bourbon.
+```scss
+$sm: new-breakpoint(min-width 0 max-width 40em $sm_cols);
+```
+- Use variables to set the queries throughout so they are easy to adapt if necessary.
+- Place media queries nearest to the class they are affecting.
+- Rather the focusing on devices when deciding where to put breakpoints, focus
+on content.
+```scss
+$iphone: new-breakpoint(min-width 0 max-width 640px 6);
+$small: new-breakpoint(min-width 0 max-width 40em 6);
+```
+- Name breakpoint variables relative to eachother, not based on devices.
+```scss
+// Bad
+$mobile
+// Good
+$small
+```
+
+
+## Documentation
+- Be intentional when you use // (silent comments) versus /* */. When in doubt,
+use //.
+
+### KSS
+Use KSS for documentation. More information on KSS can be found on the
+[official site](http://warpspire.com/kss/)
+
+#### Example
+```scss
+// Button
+//
+// Various buttons on the site.
+//
+// Markup
+// <a class="button {{ modifier_class }}">
+//  <span class="button__text">Link</span
+// </a>
+//
+// .button-modified - A button with a different style.
+//
+//
+// Styleguide component.button
+.button { ...
+.button-modified { ...
+```
+
+#### Rationale
+KSS is the most common CSS documentation method to date. While its not perfect
+the generated documentation can be modified through templates.
+
+
+
+
+
