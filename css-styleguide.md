@@ -422,10 +422,69 @@ If you're unsure of using @extend, use these rules to not run into trouble:
 You can use mixins in place of selectors. While mixins will copy more code, the difference will often be negligible once the output file has been gzipped.
 
 ## Architecture
+A site's architecture should be based on it's goals and purposes. This means the guidance here should be adapted to different sites and situations.
 
-### File structure
+### Modular/component architecture
+In the modular or component architecture every page is broken into a series of modular components. There are two sets of these components: ```components``` and ```modules```. Components are very basic structure elements such as buttons, blurbs, navs, and positioning structures like insets, island, enclosure. From here, modules are build with these components. The architecture also attempts to keep the specificity trend in a curve upwards as you move down in the file.
+
+- Start with an elements file for all tag rules (a, h1-h5, p, *, html, body).
+- Create component files for each structural element, such as buttons, navs, etc. These are mainly classed based and use BEM or another naming scheme.
+- Create more specific structure with modules. For instance, if the logo image and text needs very specific treatment, use a module.
+	- Build modules from components, through mixins, extend and html.
+	- Modules can have higher specificity, its fine to use deeper nesting.
+- Have an overrides file or folder which are global rules that are meant to override components and modules.
+	- These can be generic utilities.
+	- A good thing to put here are breakpoint specific rules. Such as hiding something at small breakpoints.
+
+#### File structure
+```sh
+_elements.scss
+_typeography.scss
+_util.scss
+_mixins.scss
+_vars.scss
+component/_blurb.scss
+component/_button.scss
+component/_island.scss
+component/_sub_nav.scss
+module/_logo.scss
+module/_progress_bar.scss
+lib/bourbon.scss
+lib/neat.scss
+_overrides.scss
+```
+- For the ```util```, ```typeography```, ```elements```, and ```overrides``` files, once they grow too large in size, split them into their own folder with sub files.
+```sh
+elements/_all.scss
+elements/_p.scss
+elements/_h.scss
+typeography/_body.scss
+typeography/_links.scss
+overrides/_breakpoints.scss
+overrides/_util.scss
+util/_center.scss
+util/_clearfix.scss
+```
 
 ### Importing
+CSS rules get overridden later in the file. This means sass imports can be used to control inheritance and specificity.
+- Start with base elements.
+- Move to single nested classes and utils.
+- Move next to more specific classes, often with nesting.
+- Move next to overrides, possibly with !important rules.
+- Import alphabetically
+- Only modify import order for groups of files, not specific files.
+```scss
+// Bad
+@import 'module/logo';
+@import 'component/mask';
+@import 'component/button'; /* Has to be imported after "mask" */
+
+// Good
+@import 'component/button';
+@import 'component/mask';
+@import 'module/logo';
+```
 
 
 ## Specificity
