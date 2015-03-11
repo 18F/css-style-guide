@@ -17,7 +17,7 @@
 
 <a name="processor"></a>
 ## Preprocessor
-The  most supported preprocessor is sass/scss. Using this pre-processor means you'll get supported resources such as frameworks, libraries, tutorials and a comprehensive styleguide as support.
+The most supported CSS preprocessor 18F is Sass/SCSS. Using this pre-processor means you'll get supported resources such as frameworks, libraries, tutorials and a comprehensive styleguide as support.
 
 That being said, any preprocessor is allowed as long as it's a sound project and has community support.
 
@@ -41,14 +41,14 @@ directly in HTML classes.
 
 ### Spacing
 - Where possible, limit CSS files’ width to 80 characters.
-	- There will be unavoidable exceptions to this rule—such as URLs, or gradient syntax—which shouldn’t be worried about.
+	- There will be unavoidable exceptions to this rule, such as URLs, or gradient syntax. Don’t worry.
 - Use soft-tabs with a two space indent.
 - Put one space after : in property declarations.
 - Put spaces before { in rule declarations.
-- A blank line should be placed between each selector block.
-- Should end with a closing curly brace that is unindented and on a separate line
+- Put a blank line between each selector block.
+- To close a selector block, put an unindented closing curly brace on a separate line.
 - Each declaration should appear on its own line for more accurate error reporting.
-- Selectors should never be indented
+- Do not indent selectors
 ```scss
 // Good
 .rule {
@@ -75,9 +75,8 @@ selector3 {
 ```
 
 ### Property-Value Pairs
-- Each on its own line
-- Be indented one level.
-- A single space after the colon that separates the name from the value.
+- Put each pair on its own line.
+- Indent each pair one level.
 - End in a semicolon.
 ```scss
 selector {
@@ -86,22 +85,24 @@ selector {
 }
 ```
 
-- Strive to limit use of shorthand declarations to instances where you must
-explicitly set all the available values.
+- Do not use shorthand declarations unless you need to explicitly set all the available values.
 ```scss
 // Bad
 margin: inherit 3em;
 // Good
 margin-bottom: 3em;
 margin-top: 3em;
+
+margin: 3em 4em 2em 1em;
 ```
 
-- URLs and string values should be single quoted
+- Single-quote URLs and string values
 ```scss
   background-image: url('/images/kittens.jpg');
   font-family: 'Helvetica', sans-serif;
   font-family: 'Lucida Grande', 'Helvetica', sans-serif;
 ```
+
 - Top-level numeric calculations should always be wrapped in parentheses
 ```scss
 // Good
@@ -114,7 +115,10 @@ margin-top: 3em;
   width: 100% / 3;
 }
 ```
-- Avoid magic numbers. At the very least, comment them with a TODO
+
+- Wrap top-level numeric calculations in parentheses
+
+- Avoid arbitrary numbers that are repeated, or linked, or dependent on other parts of the code, other known as magic numbers
 ```scss
 // Bad
 .component {
@@ -142,9 +146,9 @@ margin-top: 3em;
 	2. @extend directives
 	3. @include directives
 	4. properties
-- For properties alphabetical order or type order, just keep the whole project consistant.
-- Nested selectors always coming after a new line.
-- Mixin calls with @content coming after any nested selector.
+- Within properties, you may use alphabetical order or type order—just pick one and keep the whole project consistent.
+- Put a new line before nested selectors.
+- Put mixin calls with @content after nested selectors.
 ```scss
 // Good
 .module {
@@ -164,6 +168,17 @@ margin-top: 3em;
 }
 ```
 
+<a name="format_notes"></a>
+#### Notes
+##### Setting text editors to 80 chars
+- Sublime: Add a `rulers` setting with 80 as the value
+	- ```"rulers": [80]```
+- Atom: Set the `preferredLineLength` setting to 80
+	- `preferredLineLength: 80`
+- Vim: Set two options in your .vimrc to wrap lines at 80 characters.
+	- ```set formatoptions+=w```
+	- ```set tw=8```
+       
 
 <a name="units"></a>
 ## Units
