@@ -1,27 +1,28 @@
 # Coding styleguide
 
-1. Preproocessor
-2. Frameworks
-3. Syntax & Formatting
-4. Units
-5. Naming
-6. Variables
-7. Specificity
-8. Architecture
-9. Documentation
+## Table of Contents
 
-### Things to cover
-- Being careful with @extend -> architecture
-- Breakpoints
-- Sass output and folder structure there -> architecture
-- Mixins and functions
-- Full example
+1. [Preprocessor](#processor)
+2. [Frameworks](#frameworks)
+3. [Format](#format)
+4. [Units](#units)
+5. [Naming](#naming)
+6. [Inheritance](#inheritance)
+7. [Architecture](#architecture)
+8. [Specificity](#specificity)
+9. [Variables](#variables)
+10. [Responsive Design](#responsive_design)
+11. [Documentation](#documentation)
 
+
+<a name="processor"></a>
 ## Preprocessor
 The  most supported preprocessor is sass/scss. Using this pre-processor means you'll get supported resources such as frameworks, libraries, tutorials and a comprehensive styleguide as support.
 
 That being said, any preprocessor is allowed as long as it's a sound project and has community support.
 
+
+<a name="frameworks"></a>
 ## Frameworks
 18F currently recommends two CSS frameworks. Team members can choose the framework that best meets project and design/dev needs.
 
@@ -35,6 +36,7 @@ These frameworks were chosen because they are relatively unopinionated about des
 directly in HTML classes.
 
 
+<a name="format"></a>
 ## Format
 
 ### Spacing
@@ -163,6 +165,7 @@ margin-top: 3em;
 ```
 
 
+<a name="units"></a>
 ## Units
 ### Measurements
 - Use **rem** units for font sizes with a em fallback.
@@ -237,6 +240,7 @@ color: #FFF;
 ```
 
 
+<a name="naming"></a>
 ## Naming
 - HTML elements should be in lowercase.
 ```scss
@@ -377,6 +381,7 @@ Don't attach styles to classes with a `js-` flag. These classes are reserved for
 A `js-` flagged class needs to be highly portable. Adding styles to it breaks that portability.
 
 
+<a name="inheritance"></a>
 ## Inheritance (@include and @extend)
 ### Mixins
 - Use mixins for groups of properties that appear together for a reaons and are used multiple times.
@@ -421,6 +426,8 @@ If you're unsure of using @extend, use these rules to not run into trouble:
 
 You can use mixins in place of selectors. While mixins will copy more code, the difference will often be negligible once the output file has been gzipped.
 
+
+<a name="architecture"></a>
 ## Architecture
 A site's architecture should be based on it's goals and purposes. This means the guidance here should be adapted to different sites and situations.
 
@@ -486,7 +493,7 @@ CSS rules get overridden later in the file. This means sass imports can be used 
 @import 'module/logo';
 ```
 
-
+<a name="specificity"></a>
 ## Specificity
 - IDs should be reserved for JavaScript.
 ```scss
@@ -544,6 +551,7 @@ Attribute selectors should use double quotes around values Refrain from using ov
 IDs should be reserved for JavaScript. Unless you have a very good reason, all CSS should be attached to classes rather than IDs. When in doubt, use a class name. This prevents target confusion and allows CSS devs and JS devs to co-exist in the same code in peace. If you must use an id selector (#selector) make sure that you have no more than one in your rule declaration.
 
 
+<a name="variables"></a>
 ## Variables
 - Create new variables in the following circumstances.
 	- the values is repeated twice.
@@ -592,6 +600,7 @@ $z_index-show: $z_index-1;
 ```
 
 
+<a name="responsive_design"></a>
 ## Responsive Design & Breakpoints
 - Set variables for breakpoints at the top of your stylesheet. This
   functionality is built into bourbon.
@@ -615,6 +624,7 @@ $small
 ```
 
 
+<a name="documentation"></a>
 ## Documentation
 - Be intentional when you use // (silent comments) versus /* */. When in doubt,
 use //.
