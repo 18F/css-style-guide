@@ -17,7 +17,7 @@
 
 <a name="processor"></a>
 ## Preprocessor
-The most supported CSS preprocessor 18F is Sass/SCSS. Using this pre-processor means you'll get supported resources such as frameworks, libraries, tutorials and a comprehensive styleguide as support.
+The most supported CSS preprocessor at 18F is Sass/SCSS. Using this pre-processor means you'll get supported resources such as frameworks, libraries, tutorials and a comprehensive styleguide as support.
 
 That being said, any preprocessor is allowed as long as it's a sound project and has community support.
 
@@ -40,7 +40,7 @@ directly in HTML classes.
 ## Format
 
 ### Spacing
-- Where possible, limit CSS files’ width to 80 characters.
+- Where possible, limit CSS files’ width to 80 characters. See [notes](#format_notes) to see how to configure your text editor to 80 characters.
 	- There will be unavoidable exceptions to this rule, such as URLs, or gradient syntax. Don’t worry.
 - Use soft-tabs with a two space indent.
 - Put one space after : in property declarations.
@@ -118,7 +118,7 @@ margin: 3em 4em 2em 1em;
 
 - Wrap top-level numeric calculations in parentheses
 
-- Avoid arbitrary numbers that are repeated, or linked, or dependent on other parts of the code, other known as magic numbers
+- Avoid arbitrary numbers that are repeated, or linked, or dependent on other parts of the code, (aka “magic numbers”).
 ```scss
 // Bad
 .component {
@@ -170,7 +170,7 @@ margin: 3em 4em 2em 1em;
 
 <a name="format_notes"></a>
 #### Notes
-##### Setting text editors to 80 chars
+##### How to set text editors to 80 chars
 - Sublime: Add a `rulers` setting with 80 as the value
 	- ```"rulers": [80]```
 - Atom: Set the `preferredLineLength` setting to 80
@@ -217,25 +217,25 @@ html {
   width: 82.5%;
 }
 ```
-- If the unit is 0, it does not require a unit.
+- Do not use a unit with 0.
 ```scss
 // Good
 width: 0;
 // Bad
 width: 0px;
 ```
-- Ensure a unit is never left out for dimensions, margins, borders, padding,
-typography.
+- Definitely use a unit for dimensions, margins, borders, padding, and typography.
 ```scss
 // Bad
 width: 12;
 ```
 
+
 ### Colors
 - Use with **hex** notation, **rgb(a)**, or **hsl(a)**.
 - Both three-digit and six-digit hexadecimal notation are acceptable.
 - When denoting color using hexadecimal notation, use all lowercase letters.
-- When using HSL or RGB notation, always add a single space after a comma (,) and no space between parentheses ((, )) and content.
+- When using HSL or RGB notation, always add a single space after a comma and no space between parentheses and content.
 ```scss
 // Good
 color: #fff;
@@ -246,8 +246,9 @@ color: rgba(255, 100, 255, 0.5);
 // Bad
 color: #FFF;
 ```
-- If you use an rgba rule, include a fallback. i.e:
+- If you use an rgba rule, include a fallback.
 ```scss
+// Good
 .illustration {
   background-color: #eee; /* Fallback */
   background-color: rgba(221, 221, 221, 0.75);
@@ -263,7 +264,7 @@ body, div {
 ```
 - Classes should be lowercase.
 - Avoid camelcase.
-- Ensure things are understanbly named.
+- Name things clearly.
 ```scss
 // Bad
 // Avoid uppercase
@@ -272,13 +273,11 @@ body, div {
 // Avoid camel case
 .commentForm { }
 
-// What is a c1-xr?! Use a better name.
+// What is a c1-xr? Use a more explicit name.
 .c1-xr { }
 
-// Use quotes in psuedo selectors
-input[type=text] { }
-```
-- Avoid presentation or location specific words in the name.
+
+- Avoid presentation- or location-specific words in names, as this will cause problems when you (invariably) need to change the color/width/feature later
 ```scss
 // Bad
 .blue
@@ -290,15 +289,15 @@ input[type=text] { }
 .primary
 .lg-box
 ```
-- Be apprehensive to name components based on content.
+- Be wary of naming components based on content, as this limits the use of the class
 ```scss
-// Be wary of naming like this, as it limits the use of the class.
+// Danger zone
 .product-list
 
 // Better
 .item-list
 ```
-- Don't abbreviate unless its a well known abbreviation
+- Don't abbreviate unless its a well-known abbreviation
 ```scss
 // Bad
 .bm-rd
@@ -315,24 +314,27 @@ input[type=text] { }
 ```scss
 .button { }
 ```
-- Name modifiers and state based rules with adjectives.
+- Name modifiers and state-based rules with adjectives.
 ```scss
 .is_hovered { }
 ```
-- If your CSS has to interface in the public with other CSS libraries, consider namespacing every class.
+- If your CSS has to interface with other CSS libraries, consider namespacing every class.
 ```css
 .f18-component
 ```
 
 ### Methodologies
-There are many naming methodologies that are supported by this guidelines. The important thing is to stick with a consistent naming convention. Here's a rundown of some known methodologies.
+There are many naming methodologies that are supported by these guidelines. The most important thing is to stick with a consistent naming convention. Here's a rundown of some methodologies used successfully by our team.
 
 #### BEM
-BEM is based on a structure of every entity in CSS being composed of a blocks, elements and modifiers. For each entity (component or module) there is a top level block class, which has various elements nested in it. The top level block can also have various modifiers that are small differences in the base block.
+BEM (which stands for block, element, modifier) structures CSS such that every entity is composed of (you guessed it) blocks, elements and modifiers. From [Harry Roberts](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
+
+> The point of BEM is to tell other developers more about what a piece of markup is doing from its name alone. By reading some HTML with some classes in, you can see how – if at all – the chunks are related; something might just be a component, something might be a child, or element, of that component, and something might be a variation or modifier of that component. 
+
 
 #####Resources
-- [article explaining bem](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
-- [bem website](https://en.bem.info/method/)
+- [article explaining BEM](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
+- [BEM website](https://en.bem.info/method/)
 
 ```scss
 // block
@@ -361,11 +363,11 @@ BEM is based on a structure of every entity in CSS being composed of a blocks, e
 
 ```
 
-#### Fun
-The FUN methodology is very similar to BEM but is a little light weight in its implementation. FUN names are composed of a namespace, component name, component section, and variant flag: `[namespace][-ComponentName][_ComponentSection][-variant-flag]`.
+#### FUN
+The FUN methodology is very similar to BEM but is more lightweight in implementation. FUN names are composed of a namespace, component name, component section, and variant flag: `[namespace][-ComponentName][_ComponentSection][-variant-flag]`.
 
 ##### Resouces
-- [fun explained](http://benfrain.com/fun-css-naming-convention-explained/)
+- [FUN explained](http://benfrain.com/fun-css-naming-convention-explained/)
 
 ```scss
 // namespace + component
@@ -399,7 +401,7 @@ A `js-` flagged class needs to be highly portable. Adding styles to it breaks th
 <a name="inheritance"></a>
 ## Inheritance (@include and @extend)
 ### Mixins
-- Use mixins for groups of properties that appear together for a reaons and are used multiple times.
+- Use mixins for groups of properties that appear together intentionally and are used multiple times.
 ```scss
 @mixin clearfix {
   &:after {
@@ -417,7 +419,7 @@ A `js-` flagged class needs to be highly portable. Adding styles to it breaks th
   height: $height;
 }
 ```
-- Do not use mixins for browser prefixes. Use [Autoprefixer)[https://github.com/postcss/autoprefixer] or Bourbon for that.
+- Do not use mixins for browser prefixes. Use [Autoprefixer]https://github.com/postcss/autoprefixer) or Bourbon for that.
 ```scss
 // Bad
 @mixin transform($value) {
@@ -444,19 +446,19 @@ You can use mixins in place of selectors. While mixins will copy more code, the 
 
 <a name="architecture"></a>
 ## Architecture
-A site's architecture should be based on it's goals and purposes. This means the guidance here should be adapted to different sites and situations.
+A site's architecture should be based on its goals and purposes. This means the guidance here should be adapted to different sites and situations.
 
 ### Modular/component architecture
-In the modular or component architecture every page is broken into a series of modular components. There are two sets of these components: ```components``` and ```modules```. Components are very basic structure elements such as buttons, blurbs, navs, and positioning structures like insets, island, enclosure. From here, modules are build with these components. The architecture also attempts to keep the specificity trend in a curve upwards as you move down in the file.
+When using a modular or component architecture, every page is broken into a series of modular components. There are two sets of these components: ```components``` and ```modules```. Components are very basic structure elements such as buttons, blurbs, navs, and positioning structures like insets, island, enclosure. From here, modules are built with these components. This architecture also attempts to keep the specificity trend in an upwards curve as you move down in the file (more on this to come).
 
 - Start with an elements file for all tag rules (a, h1-h5, p, *, html, body).
-- Create component files for each structural element, such as buttons, navs, etc. These are mainly classed based and use BEM or another naming scheme.
+- Create component files for each structural element, such as buttons, navs, etc. These are mainly class-based and use BEM or another naming scheme.
 - Create more specific structure with modules. For instance, if the logo image and text needs very specific treatment, use a module.
-	- Build modules from components, through mixins, extend and html.
-	- Modules can have higher specificity, its fine to use deeper nesting.
-- Have an overrides file or folder which are global rules that are meant to override components and modules.
+	- Build modules from components through mixins, extends and HTML.
+	- Modules can have higher specificity, it’s fine to use deeper nesting.
+- Have an overrides file or folder comprised of global rules that are meant to override components and modules.
 	- These can be generic utilities.
-	- A good thing to put here are breakpoint specific rules. Such as hiding something at small breakpoints.
+	- A good thing to put here are breakpoint-specific rules, such as hiding something at small breakpoints.
 
 #### File structure
 ```sh
@@ -518,8 +520,7 @@ CSS rules get overridden later in the file. This means sass imports can be used 
 // Good
 .component { }
 ```
-- Don't nest more then 3 layers deep.
-- Try not to chain selectors.
+- Don't nest more than 3 layers deep.
 - Do not fix problems with ```!important```. Use ```!important``` purposefully.
 ```scss
 // Bad
@@ -532,7 +533,7 @@ CSS rules get overridden later in the file. This means sass imports can be used 
   display: none !important
 }
 ```
-- Keep specificity low and trend upwards in specificity as you move further down file. See Specificty graph.
+- Keep specificity low and trend upwards in specificity as you move further down file. See Specificity graph.
 - Don't use unnecessary tag selectors.
 ```scss
 // Bad
@@ -543,20 +544,21 @@ p.body_text { }
 ```
 - If you have to hack specificity, use a safe hack: the multi class.
 ```scss
+// multi-class hack
 .component.component { }
 ```
 
 ### Specificity graph
-An easy rule to use when dealing with specificy is to start from a low specificty and curve to higher specificity as you move towards the bottom of the output file. The reasoning for this is that CSS rules get replace by rules further down in the file, meaning you'll override rules in an expected way.
+An easy rule to use when dealing with specificity is to start from a low specificity and curve to higher specificity as you move towards the bottom of the output file. Since CSS rules get replaced by rules further down in the file, you'll override rules in an expected way.
 
-Theres a tool that can graph your files specificity, [css specificity graph](http://jonassebastianohlsson.com/specificity-graph/). Run your final output file through this tool and strive for a curve trending upwards.
+There’s a tool that can graph your files’ specificity, [CSS specificity graph](http://jonassebastianohlsson.com/specificity-graph/). Run your final output file through this tool and strive for a curve trending upwards.
 
 #### Resources
 * [css specificity graph](http://jonassebastianohlsson.com/specificity-graph/)
 * [explanation](http://csswizardry.com/2014/10/the-specificity-graph/)
 
 ### Rationale
-With specificity, comes great responsibility. Broad selectors allow us to be efficient, yet can have adverse consequences if not tested. Location-specific selectors can save us time, but will quickly lead to a cluttered stylesheet. Exercise your best judgement to create selectors that find the right balance between contributing to the overall style and layout of the DOM.
+With specificity comes great responsibility. Broad selectors allow us to be efficient, yet can have adverse consequences if not tested. Location-specific selectors can save us time, but will quickly lead to a cluttered stylesheet. Exercise your best judgement to create selectors that find the right balance between contributing to the overall style and layout of the DOM.
 
 When modifying an existing element for a specific use, try to use specific class names. Instead of .listings-layout.bigger use rules like .listings-layout.listings-bigger. Think about ack/greping your code in the future.
 
@@ -568,9 +570,9 @@ IDs should be reserved for JavaScript. Unless you have a very good reason, all C
 
 <a name="variables"></a>
 ## Variables
-- Create new variables in the following circumstances.
-	- the values is repeated twice.
-	- the value is likely to be updated at least once.
+- Create new variables in the following circumstances:
+	- the values is repeated twice;
+	- the value is likely to be updated at least once;
 	- all occurrences of the value are tied to the variable (i.e. not by coincidence).
 - When building scss that will be distributed use the ```default``` flag to allow overriding
 ```scss
@@ -618,7 +620,7 @@ $z_index-show: $z_index-1;
 <a name="responsive_design"></a>
 ## Responsive Design & Breakpoints
 - Set variables for breakpoints at the top of your stylesheet. This
-  functionality is built into bourbon.
+  functionality is built into Bourbon.
 ```scss
 $sm: new-breakpoint(min-width 0 max-width 40em $sm_cols);
 ```
@@ -668,7 +670,7 @@ Use KSS for documentation. More information on KSS can be found on the
 ```
 
 #### Rationale
-KSS is the most common CSS documentation method to date. While its not perfect
+KSS is the most common CSS documentation method to date. While it’s not perfect,
 the generated documentation can be modified through templates.
 
 
