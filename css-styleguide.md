@@ -49,6 +49,7 @@ directly in HTML classes.
 - To close a selector block, put an unindented closing curly brace on a separate line.
 - Each declaration should appear on its own line for more accurate error reporting.
 - Do not indent selectors
+
 ```scss
 // Good
 .rule {
@@ -78,6 +79,7 @@ selector3 {
 - Put each pair on its own line.
 - Indent each pair one level.
 - End in a semicolon.
+
 ```scss
 selector {
   name: value;
@@ -86,6 +88,7 @@ selector {
 ```
 
 - Do not use shorthand declarations unless you need to explicitly set all the available values.
+
 ```scss
 // Bad
 margin: inherit 3em;
@@ -97,6 +100,7 @@ margin: 3em 4em 2em 1em;
 ```
 
 - Single-quote URLs and string values
+
 ```scss
   background-image: url('/images/kittens.jpg');
   font-family: 'Helvetica', sans-serif;
@@ -104,6 +108,7 @@ margin: 3em 4em 2em 1em;
 ```
 
 - Top-level numeric calculations should always be wrapped in parentheses
+
 ```scss
 // Good
 .component {
@@ -119,6 +124,7 @@ margin: 3em 4em 2em 1em;
 - Wrap top-level numeric calculations in parentheses
 
 - Avoid arbitrary numbers that are repeated, or linked, or dependent on other parts of the code, (aka “magic numbers”).
+
 ```scss
 // Bad
 .component {
@@ -149,6 +155,7 @@ margin: 3em 4em 2em 1em;
 - Within properties, you may use alphabetical order or type order—just pick one and keep the whole project consistent.
 - Put a new line before nested selectors.
 - Put mixin calls with @content after nested selectors.
+
 ```scss
 // Good
 .module {
@@ -175,7 +182,7 @@ margin: 3em 4em 2em 1em;
 	- ```"rulers": [80]```
 - Atom: Set the `preferredLineLength` setting to 80
 	- `preferredLineLength: 80`
-- Vim: Set two options in your .vimrc to wrap lines at 80 characters.
+- Vim: Set two options in your `.vimrc` to wrap lines at 80 characters.
 	- ```set formatoptions+=w```
 	- ```set tw=8```
        
@@ -185,23 +192,28 @@ margin: 3em 4em 2em 1em;
 ### Measurements
 - Use **rem** units for font sizes with a em fallback.
 This can be done with the following mixin:
+
 ```scss
 @mixin font-size($sizeValue: 1.6) {
   font-size: ($sizeValue * 10) + px;
   font-size: $sizeValue + rem;
 }
 ```
+
 - Set the html font size to 62.5% to ensure .1 rem unit equals 1px
+
 ```scss
 html {
   font-size: 62.5%;
 }
 ```
+
 - Use **em** units for positioning.
 - Use **percentages** when elements have to change based on screen size.
 - Use **px** units for when a measurement shouldn't change based on user set font size or browser zooming.
 - Use unitless values for line-height as this will inherit values from the font-size.
 - Use up to 10 decimal places in em units to ensure accuracy.
+
 ```scss
 // Good
 .body_copy {
@@ -217,14 +229,18 @@ html {
   width: 82.5%;
 }
 ```
+
 - Do not use a unit with 0.
+
 ```scss
 // Good
 width: 0;
 // Bad
 width: 0px;
 ```
+
 - Definitely use a unit for dimensions, margins, borders, padding, and typography.
+
 ```scss
 // Bad
 width: 12;
@@ -236,6 +252,7 @@ width: 12;
 - Both three-digit and six-digit hexadecimal notation are acceptable.
 - When denoting color using hexadecimal notation, use all lowercase letters.
 - When using HSL or RGB notation, always add a single space after a comma and no space between parentheses and content.
+
 ```scss
 // Good
 color: #fff;
@@ -246,7 +263,9 @@ color: rgba(255, 100, 255, 0.5);
 // Bad
 color: #FFF;
 ```
+
 - If you use an rgba rule, include a fallback.
+
 ```scss
 // Good
 .illustration {
@@ -259,12 +278,15 @@ color: #FFF;
 <a name="naming"></a>
 ## Naming
 - HTML elements should be in lowercase.
+
 ```scss
 body, div {
 ```
+
 - Classes should be lowercase.
 - Avoid camelcase.
 - Name things clearly.
+
 ```scss
 // Bad
 // Avoid uppercase
@@ -275,9 +297,11 @@ body, div {
 
 // What is a c1-xr? Use a more explicit name.
 .c1-xr { }
+```
 
 
-- Avoid presentation- or location-specific words in names, as this will cause problems when you (invariably) need to change the color/width/feature later
+- Avoid presentation- or location-specific words in names, as this will cause problems when you (invariably) need to change the color/width/feature later.
+
 ```scss
 // Bad
 .blue
@@ -289,7 +313,9 @@ body, div {
 .primary
 .lg-box
 ```
+
 - Be wary of naming components based on content, as this limits the use of the class
+
 ```scss
 // Danger zone
 .product-list
@@ -297,7 +323,9 @@ body, div {
 // Better
 .item-list
 ```
+
 - Don't abbreviate unless its a well-known abbreviation
+
 ```scss
 // Bad
 .bm-rd
@@ -305,23 +333,32 @@ body, div {
 // Good
 .block--lg
 ```
+
 - Use quotes in type psuedo selectors.
+
 ```scss
 // Good
 .top_image[type="text"] { }
 ```
+
 - Name CSS components/modules with singlular nouns.
+
 ```scss
 .button { }
 ```
+
 - Name modifiers and state-based rules with adjectives.
+
 ```scss
 .is_hovered { }
 ```
+
 - If your CSS has to interface with other CSS libraries, consider namespacing every class.
+
 ```css
 .f18-component
 ```
+
 
 ### Methodologies
 There are many naming methodologies that are supported by these guidelines. The most important thing is to stick with a consistent naming convention. Here's a rundown of some methodologies used successfully by our team.
@@ -402,6 +439,7 @@ A `js-` flagged class needs to be highly portable. Adding styles to it breaks th
 ## Inheritance (@include and @extend)
 ### Mixins
 - Use mixins for groups of properties that appear together intentionally and are used multiple times.
+
 ```scss
 @mixin clearfix {
   &:after {
@@ -411,15 +449,19 @@ A `js-` flagged class needs to be highly portable. Adding styles to it breaks th
   }
 }
 ```
+
 - Use mixins for compoennts to change size.
 - Use mixins when something requires parameters.
+
 ```scss
 @mixin size($width, $height: $width) {
   width: $width;
   height: $height;
 }
 ```
-- Do not use mixins for browser prefixes. Use [Autoprefixer]https://github.com/postcss/autoprefixer) or Bourbon for that.
+
+- Do not use mixins for browser prefixes. Use [Autoprefixer](https://github.com/postcss/autoprefixer) or Bourbon for that.
+
 ```scss
 // Bad
 @mixin transform($value) {
@@ -428,6 +470,7 @@ A `js-` flagged class needs to be highly portable. Adding styles to it breaks th
   transform: $value;
 }
 ```
+
 ### Extend
 Be very careful with using @extend. It's a powerful tool that can have disastrous side-effects. Before using please consider:
 
@@ -477,7 +520,9 @@ lib/bourbon.scss
 lib/neat.scss
 _overrides.scss
 ```
+
 - For the ```util```, ```typeography```, ```elements```, and ```overrides``` files, once they grow too large in size, split them into their own folder with sub files.
+
 ```sh
 elements/_all.scss
 elements/_p.scss
@@ -492,12 +537,14 @@ util/_clearfix.scss
 
 ### Importing
 CSS rules get overridden later in the file. This means sass imports can be used to control inheritance and specificity.
+
 - Start with base elements.
 - Move to single nested classes and utils.
 - Move next to more specific classes, often with nesting.
 - Move next to overrides, possibly with !important rules.
 - Import alphabetically
 - Only modify import order for groups of files, not specific files.
+
 ```scss
 // Bad
 @import 'module/logo';
@@ -513,6 +560,7 @@ CSS rules get overridden later in the file. This means sass imports can be used 
 <a name="specificity"></a>
 ## Specificity
 - IDs should be reserved for JavaScript.
+
 ```scss
 // Bad
 #component { }
@@ -520,8 +568,10 @@ CSS rules get overridden later in the file. This means sass imports can be used 
 // Good
 .component { }
 ```
+
 - Don't nest more than 3 layers deep.
 - Do not fix problems with ```!important```. Use ```!important``` purposefully.
+
 ```scss
 // Bad
 .component {
@@ -533,8 +583,10 @@ CSS rules get overridden later in the file. This means sass imports can be used 
   display: none !important
 }
 ```
+
 - Keep specificity low and trend upwards in specificity as you move further down file. See Specificity graph.
 - Don't use unnecessary tag selectors.
+
 ```scss
 // Bad
 p.body_text { }
@@ -542,7 +594,9 @@ p.body_text { }
 // Good
 .body_text
 ```
+
 - If you have to hack specificity, use a safe hack: the multi class.
+
 ```scss
 // multi-class hack
 .component.component { }
@@ -574,13 +628,16 @@ IDs should be reserved for JavaScript. Unless you have a very good reason, all C
 	- the values is repeated twice;
 	- the value is likely to be updated at least once;
 	- all occurrences of the value are tied to the variable (i.e. not by coincidence).
-- When building scss that will be distributed use the ```default``` flag to allow overriding
+- When building scss that will be distributed use the ```default``` flag to allow overriding.
+
 ```scss
 $baseline: 1em !default;
 ```
+
 - The ```!global``` flag should only be used when overriding a global variable from a local scope.
 - Variables across the whole scss codebase should be placed in their own file.
 - When declaring color variables, don't base the name on the color content.
+
 ```scss
 // Bad
 $light_blue: #18f;
@@ -591,12 +648,16 @@ $primary: #18f;
 $secondary: #383;
 $neutral: #ccc;
 ```
+
 - Be careful when naming variables based on their context.
+
 ```scss
 // Bad
 $background_color
 ```
+
 - Don't use the value of dimensional variables in the variable name
+
 ```scss
 // Bad
 $width_100: 100em;
@@ -604,8 +665,10 @@ $width_100: 100em;
 // Good
 $width_lg: 100em;
 ```
+
 - Name all used z-indexes with a variable.
 - Have a z-index variable for each z-index used, and a separate variable, possibly aliased for where the z-index is used.
+
 ```scss
 $z_index-neg_1: -100;
 $z_index-neg_2: -200;
@@ -619,20 +682,24 @@ $z_index-show: $z_index-1;
 
 <a name="responsive_design"></a>
 ## Responsive Design & Breakpoints
-- Set variables for breakpoints at the top of your stylesheet. This
-  functionality is built into Bourbon.
+- Set variables for breakpoints at the top of your stylesheet. This functionality is built into Bourbon.  
+
 ```scss
 $sm: new-breakpoint(min-width 0 max-width 40em $sm_cols);
 ```
+
 - Use variables to set the queries throughout so they are easy to adapt if necessary.
 - Place media queries nearest to the class they are affecting.
 - Rather the focusing on devices when deciding where to put breakpoints, focus
 on content.
+
 ```scss
 $iphone: new-breakpoint(min-width 0 max-width 640px 6);
 $small: new-breakpoint(min-width 0 max-width 40em 6);
 ```
+
 - Name breakpoint variables relative to eachother, not based on devices.
+
 ```scss
 // Bad
 $mobile
@@ -643,8 +710,8 @@ $small
 
 <a name="documentation"></a>
 ## Documentation
-- Be intentional when you use // (silent comments) versus /* */. When in doubt,
-use //.
+- Be intentional when you use `//` (silent comments) versus `/* */`. When in doubt,
+use `//`.
 
 ### KSS
 Use KSS for documentation. More information on KSS can be found on the
