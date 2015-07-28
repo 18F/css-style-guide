@@ -19,7 +19,7 @@ The most supported CSS preprocessor at 18F is [Sass/SCSS](http://sass-lang.com).
 
 That being said, any preprocessor is allowed as long as it's a sound project and has community support.
 
-The recommended way to compile your sass code is through (https://www.npmjs.com/package/node-sass)[node-sass] (rather than ruby sass). This allows eliminating the dependency on ruby for projects that don't already require it and is the fastest method of compiling sass.
+The recommended way to compile your sass code is through [node-sass](https://www.npmjs.com/package/node-sass) (rather than ruby sass). This allows eliminating the dependency on ruby for projects that don't already require it and is the fastest method of compiling sass.
 
 ## Frameworks
 18F currently recommends two CSS frameworks. Team members can choose the framework that best meets project and design/dev needs.
