@@ -15,7 +15,7 @@ title: CSS Coding Styleguide
 9. Documentation
 
 ## Preprocessor
-The most supported CSS preprocessor at 18F is Sass/SCSS. Using this pre-processor means you'll get supported resources such as frameworks, libraries, tutorials and a comprehensive styleguide as support.
+The most supported CSS preprocessor at 18F is [Sass/SCSS](http://sass-lang.com). Using this pre-processor means you'll get supported resources such as frameworks, libraries, tutorials and a comprehensive styleguide as support.
 
 That being said, any preprocessor is allowed as long as it's a sound project and has community support.
 
