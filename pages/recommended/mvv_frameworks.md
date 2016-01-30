@@ -8,7 +8,7 @@ parent: Recommendations
 AngularJS (commonly referred to as "Angular") is an open-source web application framework maintained by Google and by a community of individual developers and corporations to address many of the challenges encountered in developing single-page applications ([Wikipedia](http://en.wikipedia.org/wiki/AngularJS)).
 
 #### When to use:
-- Sites with heavy Front end, Javascript UI interactions (single page apps) such as 
+- Sites with heavy front end, JavaScript UI interactions (single page apps) such as 
   - creating, updating, deleting of information without a server reload, 
   - real-time messaging platforms, such as chat or complex messaging such as email.
   - complex data visualization dashboards, 
@@ -22,7 +22,7 @@ AngularJS (commonly referred to as "Angular") is an open-source web application 
 - If there is a strict requirement that the site should work for users that have JavaScript disabled.
 - If there already is an active M**V framework (Backbone, ampersand, Ember) being used on the site.
 - When the site's design doesn't benefit from a single page app architecture.
-- When the long-term maintenance dev team is very unfamiliar with Angular and don't have the resources to learn or hire for it.
+- When the long-term maintenance dev team is very unfamiliar with Angular and doesn't have the resources to learn or hire for it.
 
 #### Pros:
 - Takes care of a lot of boilerplate code for front end interactions.
@@ -37,19 +37,19 @@ AngularJS (commonly referred to as "Angular") is an open-source web application 
 
 
 ## Backbone
-Backbone.js is a JavaScript library with a RESTful JSON interface and is based on the model–view–presenter (MVP) application design paradigm([Wikipedia](http://en.wikipedia.org/wiki/Backbone.js)).
+Backbone.js is a JavaScript library with a RESTful JSON interface and is based on the model–view–presenter (MVP) application design paradigm ([Wikipedia](http://en.wikipedia.org/wiki/Backbone.js)).
 
 #### When to use:
 - A page design that requires dynamic data manipulation on the front end without a server request response, such as a todo app.
 - When a small front end framework is required due to performance constraints.
-- When the long-term dev maintenance team is unfamiliar with any full frameworks, such as Angular.
-- To use as a wrapper and rest data manipulation library around a view-only framework, such as React.
+- When the long-term dev maintenance team is not familiar with any full frameworks, such as Angular.
+- To use as a wrapper and REST data manipulation library around a view-only framework, such as React.
 - When the dev team is familiar enough with Backbone to know how to write maintainable Backbone code.
 
 #### When not to use:
-- When the javascript components don't keep data or manipulate data, in which case Backbone's functionality is too heavy and not specific enough for just view rendering.
+- When the JavaScript components don't keep data or manipulate data, in which case Backbone's functionality is too heavy and not specific enough for just view rendering.
 - If there is a strict requirement that the site should work for users that have JavaScript disabled.
-- When another full javascript framework is already in use, such as Angular.
+- When another full JavaScript framework is already in use, such as Angular.
 - When working with a data source that is NOT RESTful. Backbone was built for RESTful services, instead see Flux.
 
 #### Pros:
@@ -58,7 +58,7 @@ Backbone.js is a JavaScript library with a RESTful JSON interface and is based o
 
 #### Cons:
 - Still requires a lot of boilerplate code (this can be mitigated by pairing with a library like Marionette)
-- Since it has very little structure, unexperienced programs can easily create unmaintainable code with Backbone.
+- Since it has very little structure, inexperienced programmers can easily create unmaintainable code with Backbone.
 - Designed primarily for REST data.
 
 
@@ -66,9 +66,9 @@ Backbone.js is a JavaScript library with a RESTful JSON interface and is based o
 React (sometimes styled React.js or ReactJS) is an open-source JavaScript library for creating user interfaces that aims to address challenges encountered in developing single-page applications ([Wikipedia](https://en.wikipedia.org/wiki/React_(JavaScript_library))).
 
 #### When to use:
-- Single page apps that requires data manipulation on the front end without a server side request/response architecture.
-- When there's a strong need to render JavaScript based UI on the server due to performance or accessibility reasons.
-- JavaScript UI that incorperates many nested components.
+- Single page apps that require data manipulation on the front end without a server side request/response architecture.
+- When there's a strong need to render JavaScript-based UI on the server due to performance or accessibility reasons.
+- JavaScript UI that incorporates many nested components.
 - A UI with many components and updates that needs to be performance conscious.
 - When only a "view" framework is desired/required.
 - To ensure all front end components conform to a single standard.
@@ -93,7 +93,7 @@ writing complex single page applications.
 
 #### When not to use:
 - Applications that don't require any updating (create, update, delete) of data.
-- When the cost of updating an apps architecture to flux is more then the cost
+- When the cost of updating an apps architecture to Flux is more then the cost
   of writing the software as it exists.
 
 #### Pros:
