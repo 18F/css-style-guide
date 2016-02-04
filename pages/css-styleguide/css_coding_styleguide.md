@@ -25,3 +25,4 @@ The scss-lint tool currently lacks the functionality to check these rules in the
 - Does not limit line width to 80 characters
 - Does not check for numeric calculations in parentheses
 - Does not sort properties in quite the order we want (defaults to alphabetical)
+- Does not allow setting the one selector per line rule based on how many characters the selector
