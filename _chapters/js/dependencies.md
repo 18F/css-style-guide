@@ -24,20 +24,20 @@ npm installs its dependencies in the `node_modules` directory. Common convention
 
 ### Publishing
 #### Scoping a package to the 18F npm org
-18F has an npm organization called [18f](https://www.npmjs.com/org/18f) that is meant to organize permissions and packages related to 18f. As an 18F developer, when publishing a package, you have the choice whether to scope a package to the 18F org or not. Scoped packages will always be prefixed with `@18f/` before their package name and can have their permissions managed by people in the org. More information about scoped packages can be found on the [npm documentation](https://docs.npmjs.com/misc/scope).
+18F has an npm organization called [18F](https://www.npmjs.com/org/18f) that is meant to organize permissions and packages related to 18F. As an 18F developer, when publishing a package, you have the choice whether to scope a package to the 18F org or not. Scoped packages will always be prefixed with `@18f/` before their package name and can have their permissions managed by people in the org. More information about scoped packages can be found on the [npm documentation](https://docs.npmjs.com/misc/scope).
 
 ##### Guidance on when to scope a package or not
 - A package *should not* be scoped to 18F if it is not necessary for consumers (either gov or non-gov) of the package to be aware of 18F in order to use it.
-  - Example: The Draft US Web Design Standards are used by many entities outside of 18f and government. A user does not need to know anything about 18F to use the Web Design Standards package.
-- A package *should* be scoped to 18F if its use cases fall mainly inside of 18F..
-  - Example: [@18f/stylelint-rules](https://github.com/18F/stylelint-rules) is scoped to 18f because it's an 18F specific linting configuration that's directly linked to the 18F guides site.
+  - Example: The Draft US Web Design Standards are used by many entities outside of 18F and government. A user does not need to know anything about 18F to use the Web Design Standards package.
+- A package *should* be scoped to 18F if its use cases fall mainly inside of 18F.
+  - Example: [@18f/stylelint-rules](https://github.com/18F/stylelint-rules) is scoped to 18F because it's an 18F specific linting configuration that's directly linked to the 18F guides site.
 - A package *should* be scoped to 18f to avoid naming conflicts.
-  - Example: if 18f made a generic front end accordion to use across 18F sites, it should probably be scoped to `@18f/accordion` to avoid conflicts with all other accordions out there.
+  - Example: if 18F made a generic front end accordion to use across 18F sites, it should probably be scoped to `@18f/accordion` to avoid conflicts with all other accordions out there.
 
 ##### How to scope a package to 18F
-- Ensure you are part of the 18f npm org and have at least developer rights. This can be found on the [18f org team page](https://www.npmjs.com/org/18f/members).
+- Ensure you are part of the 18F npm org and have at least developer rights. This can be found in the [18F org team page](https://www.npmjs.com/org/18f/members).
   - If you don't have the proper access, ask in #g-frontend or #javascript slack channels and an admin will add you.
-- If the package has not been published to 18f yet, follow the [instructions on npm](https://docs.npmjs.com/getting-started/scoped-packages) for scoped packages.
+- If the package has not been published to 18F yet, follow the [instructions on npm](https://docs.npmjs.com/getting-started/scoped-packages) for scoped packages.
 - If the package has already been published, it currently cannot be scoped, so may need to be renamed. See the [npm documentation on existing packages](https://docs.npmjs.com/orgs/preexisting-packages) for more information.
 
 ##### General tips for publishing
