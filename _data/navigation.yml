@@ -4,8 +4,6 @@ primary:
     href: /css/
   - text: JavaScript
     href: /javascript/
-  - text: Web Components
-    href: /web-components/
   - text: Security
     href: /security/
 
@@ -44,8 +42,6 @@ js:
     href: /javascript/dependencies/
   - text: Frameworks
     href: /javascript/frameworks/
-  - text: Libraries
-    href: /javascript/libraries/
   - text: Style / Linting
     href: /javascript/style/
 
