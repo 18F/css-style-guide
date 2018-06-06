@@ -5,7 +5,7 @@ permalink: /
 Welcome to the 18F Front-End Guide! This is where we keep all of our
 guidelines for front-end design and development.
 
-## What is Front end?
+## What is front end?
 
 The Front-End Guild did a series of exercises to determine the
 fundamental differences between the front-end design and front-end
