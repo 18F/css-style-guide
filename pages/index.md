@@ -1,16 +1,16 @@
 ---
-title: 18F Front-end Guide
+title: 18F Front-End Guide
 permalink: /
 ---
-Welcome to the 18F front-end guide! This is where we keep all of our
+Welcome to the 18F Front-End Guide! This is where we keep all of our
 guidelines for front-end design and development.
 
 ## What is Front end
 
-The front-end guild did a series of exercises to determine the
+The Front-End Guild did a series of exercises to determine the
 fundamental differences between the front-end design and front-end
 developer roles at 18F. Using [some of our own research
-methods](https://methods.18f.gov), the front-end guild came up with
+methods](https://methods.18f.gov), the Front-End Guild came up with
 the following recommendations on knowing the difference between the
 two disciplines:
 
